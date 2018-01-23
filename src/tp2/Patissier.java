@@ -12,9 +12,11 @@ package tp2;
 public class Patissier implements Runnable {
 
     private Patisserie patisserie;
+    private int nbClient;
     
-    public Patissier(Patisserie patiserie) {
+    public Patissier(Patisserie patiserie, int nbClient) {
         this.patisserie = patiserie;
+        this.nbClient = nbClient;
     }
     
     @Override
@@ -25,12 +27,16 @@ public class Patissier implements Runnable {
     public void depose() {
         int compteur = 0;
         try {
-            while(compteur < 20) {
-                System.out.println("Patissier : Ajout d'un gateau\n");
+            while(compteur < 20 && patisserie.getStock().remainingCapacity() != 0) {
+                System.out.println(String.format("Patissier : Ajout d'un gateau (%d)\n",compteur));
                 patisserie.depose(new Gateau());
-                Thread.sleep(1000);
+                Thread.sleep(250);
+                compteur++;
             }
-            patisserie.depose(Gateau.GATEAU_EMPOISONNE);
+            for(int i=0; i<nbClient; i++) {
+                System.out.println("Patissier : Ajout d'un gâteau empoisonné\n");
+                patisserie.depose(Gateau.GATEAU_EMPOISONNE);
+            }            
         } catch (InterruptedException e) {
             System.out.println("Patissier : Interruption du sleep\n");
         }

@@ -13,7 +13,7 @@ import java.util.concurrent.BlockingQueue;
  * @author Mathieu VINCENT
  */
 public class Patisserie {
-    BlockingQueue stock = new ArrayBlockingQueue(15);
+    private BlockingQueue stock = new ArrayBlockingQueue(15);
     
     public void depose(Gateau gateau) {
         try {

@@ -29,7 +29,7 @@ public class Client implements Runnable {
             while(gateau != Gateau.GATEAU_EMPOISONNE) {
                 gateau = patisserie.achete();
                 System.out.println("Client : Achat d'un gâteau\n");
-                Thread.sleep(500);
+                Thread.sleep(250);
             }
         } catch(InterruptedException e) {
             System.out.println("Client : Interruption du sleep\n");

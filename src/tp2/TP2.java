@@ -17,7 +17,8 @@ public class TP2 {
     public static void main(String[] args) {
         Patisserie patisserie = new Patisserie();
         
-        Thread producteur = new Thread(new Patissier(patisserie));
+        Thread producteur = new Thread(new Patissier(patisserie,4));
+        
         Thread consommateur1 = new Thread(new Client(patisserie));
         Thread consommateur2 = new Thread(new Client(patisserie));
         Thread consommateur3 = new Thread(new Client(patisserie));
