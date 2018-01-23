@@ -10,5 +10,5 @@ package tp2;
  * @author Mathieu VINCENT
  */
 public class Gateau {
-    
+    public static final Gateau GATEAU_EMPOISONNE =  new Gateau() ;
 }

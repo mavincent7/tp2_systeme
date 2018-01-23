@@ -23,18 +23,14 @@ public class Patissier implements Runnable {
     }
     
     public void depose() {
-        boolean fullStock = false;
+        int compteur = 0;
         try {
-            while(!fullStock) {
-                if(patisserie.getStock().remainingCapacity() != 0) {
-                    System.out.println("Patissier : Ajout d'un gateau\n");
-                    patisserie.depose(new Gateau());
-                    Thread.sleep(1000);
-                } else {
-                    System.out.println("Patissier : Stock de la patisserie plein\n");
-                    fullStock = true;
-                }
+            while(compteur < 20) {
+                System.out.println("Patissier : Ajout d'un gateau\n");
+                patisserie.depose(new Gateau());
+                Thread.sleep(1000);
             }
+            patisserie.depose(Gateau.GATEAU_EMPOISONNE);
         } catch (InterruptedException e) {
             System.out.println("Patissier : Interruption du sleep\n");
         }

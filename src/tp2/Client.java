@@ -23,14 +23,14 @@ public class Client implements Runnable {
     }
     
     public void achete() {
-        int compteur = 0;
         try {
-            while(compteur < 5) {
-                patisserie.achete();
+            Gateau gateau = null;
+            
+            while(gateau != Gateau.GATEAU_EMPOISONNE) {
+                gateau = patisserie.achete();
                 System.out.println("Client : Achat d'un gâteau\n");
                 Thread.sleep(500);
-                compteur++;
-            }   
+            }
         } catch(InterruptedException e) {
             System.out.println("Client : Interruption du sleep\n");
         }
