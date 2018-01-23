@@ -5,9 +5,6 @@
  */
 package tp2;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author Mathieu VINCENT
@@ -26,18 +23,20 @@ public class Patissier implements Runnable {
     }
     
     public void depose() {
-        int compteur = 0;
+        boolean fullStock = false;
         try {
-            while(compteur < 10) {
-                System.out.println("Patissier : Ajout d'un gateau");
-                patisserie.depose(new Gateau());
-
-                Thread.sleep(1000);
-
-                compteur++;
+            while(!fullStock) {
+                if(patisserie.getStock().remainingCapacity() != 0) {
+                    System.out.println("Patissier : Ajout d'un gateau\n");
+                    patisserie.depose(new Gateau());
+                    Thread.sleep(1000);
+                } else {
+                    System.out.println("Patissier : Stock de la patisserie plein\n");
+                    fullStock = true;
+                }
             }
         } catch (InterruptedException e) {
-            System.out.println("Patissier : Interruption du sleep");
+            System.out.println("Patissier : Interruption du sleep\n");
         }
     }
 }

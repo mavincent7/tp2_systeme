@@ -5,38 +5,36 @@
  */
 package tp2;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 /**
  *
  * @author Mathieu VINCENT
  */
 public class Patisserie {
-    static List<Gateau> stock = new ArrayList<>();
+    BlockingQueue stock = new ArrayBlockingQueue(15);
     
-    public synchronized void depose(Gateau gateau) {
-        stock.add(gateau);
-        System.out.println("Patisserie : Ajout d'un gâteau");
-        if(!stock.isEmpty()) {
-            this.notify();
-        }
+    public void depose(Gateau gateau) {
+        try {
+            stock.put(gateau);
+            System.out.println("Patisserie : Ajout d'un gâteau\n");
+        } catch (InterruptedException e) {
+            System.out.println("Patisserie : Interruption de depose\n");
+        }        
     }
     
-    public synchronized Gateau achete() {
-        while(stock.isEmpty()) {
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
-                
-            }
+    public Gateau achete() {
+        Gateau retour = null;
+        try {
+            retour = (Gateau)stock.take();
+        } catch (InterruptedException ex) {
+            System.out.println("Patisserie : Interruption de achete\n");
         }
-        Gateau retour = stock.get(0);
-        stock.remove(0);
         return retour;
     }
     
-    public List<Gateau> getStock() {
+    public BlockingQueue getStock() {
         return stock;
     }
 }

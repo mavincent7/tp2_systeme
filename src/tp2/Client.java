@@ -25,7 +25,7 @@ public class Client implements Runnable {
     public void achete() {
         int compteur = 0;
         try {
-            while(compteur < 10) {
+            while(compteur < 5) {
                 patisserie.achete();
                 System.out.println("Client : Achat d'un gâteau\n");
                 Thread.sleep(500);

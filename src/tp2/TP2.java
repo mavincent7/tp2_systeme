@@ -16,10 +16,17 @@ public class TP2 {
      */
     public static void main(String[] args) {
         Patisserie patisserie = new Patisserie();
-        Thread producteur = new Thread(new Patissier(patisserie));
-        Thread consommateur = new Thread(new Client(patisserie));
         
-        consommateur.start();
+        Thread producteur = new Thread(new Patissier(patisserie));
+        Thread consommateur1 = new Thread(new Client(patisserie));
+        Thread consommateur2 = new Thread(new Client(patisserie));
+        Thread consommateur3 = new Thread(new Client(patisserie));
+        Thread consommateur4 = new Thread(new Client(patisserie));
+        
+        consommateur1.start();
+        consommateur2.start();
+        consommateur3.start();
+        consommateur4.start();
         producteur.start();        
     }
     
